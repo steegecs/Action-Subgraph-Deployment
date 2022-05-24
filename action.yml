@@ -1,0 +1,15 @@
+name: "Deployment Action"
+description: "This action is used to deploy subgraphs with relevant code changes from Messari subgraphs repository"
+author: "Chris Steege"
+
+inputs:
+  HOSTED_SERVICE_ACCESS_TOKEN:
+    description: "Access token for Messari's Hosted Service - TheGraph"
+    required: true
+  CHANGED_FILES:
+    description: "String containing all changed files in the repository at the time of Github Aciton execution"
+    required: true
+  
+runs:
+  using: 'node16'
+  main: 'dist/index.js'

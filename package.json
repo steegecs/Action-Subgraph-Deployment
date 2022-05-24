@@ -1,0 +1,23 @@
+{
+  "name": "action-subgraph-deployment",
+  "version": "1.0.0",
+  "description": "This action is used to deploy subgraphs with relevant code changes from Messari subgraphs repository",
+  "main": "index.js",
+  "scripts": {
+    "build": "ncc build src/action.js -o dist",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/steegecs/Action-Subgraph-Deployment.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/steegecs/Action-Subgraph-Deployment/issues"
+  },
+  "homepage": "https://github.com/steegecs/Action-Subgraph-Deployment#readme",
+  "dependencies": {
+    "@vercel/ncc": "^0.33.4"
+  }
+}
