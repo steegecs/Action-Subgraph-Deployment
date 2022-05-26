@@ -9,6 +9,12 @@ inputs:
   CHANGED_FILES:
     description: "String containing all changed files in the repository at the time of Github Aciton execution"
     required: true
+  ABSOLUTE_PATH:
+    description: "Returns the absolute path to the head of the repository running the action"
+    required: true
+  GRAPH_DEPLOYMENT_LOCATION:
+    description: "Deployment location on TheGraph Hosted Service"
+    required: true
   
 runs:
   using: 'node16'
