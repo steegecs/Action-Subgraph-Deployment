@@ -9041,6 +9041,7 @@ async function deploySubgraphs() {
         scripts.push('npm install -g @graphprotocol/graph-cli')
         scripts.push('npm install --dev @graphprotocol/graph-ts')
         scripts.push('npm install mustache')
+        scripts.push('npm install minimist')
         scripts.push('graph auth --product hosted-service ' + HOSTED_SERVICE_ACCESS_TOKEN)
         let dependenciesLength = scripts.length
 
@@ -9052,7 +9053,7 @@ async function deploySubgraphs() {
         directories = Array.from(deployDirectory);
         for (let i = 0; i < directories.length; i++) {
             let path = ABSOLUTE_PATH + '/subgraphs/' + directories[i]
-            scripts.push('npm --prefix ' + path + ' run -s deploy ' + GRAPH_DEPLOYMENT_LOCATION)
+            scripts.push('npm --prefix ' + path + ' run -s deploy --SUBGRAPH=' + directories[i] + ' --LOCATION=' + GRAPH_DEPLOYMENT_LOCATION)
         }
 
         // Deploy protocols if relevant
@@ -9062,9 +9063,8 @@ async function deploySubgraphs() {
             protocols = Array.from(deployProtocol.get(directories[i]));
             for (let j = 0; j < protocols.length; j++) {
                 if (deployDirectory.has(directories[i]) == false) {
-
                     let path = ABSOLUTE_PATH + '/subgraphs/' + directories[i]
-                    scripts.push('npm --prefix ' + path + ' run -s deploy ' + protocols[j] + ' ' + GRAPH_DEPLOYMENT_LOCATION)
+                    scripts.push('npm --prefix ' + path + ' run -s deploy --SUBGRAPH=' + directories[i] + ' --PROTOCOL=' +  protocols[j] + ' --LOCATION=' + GRAPH_DEPLOYMENT_LOCATION)
                 }
             }
         }
@@ -9079,7 +9079,7 @@ async function deploySubgraphs() {
                     if (deployDirectory.has(directories[i]) == false) {
                         if (deployProtocol.has(directories[i]) == false | (deployProtocol.has(directories[i]) == true & deployProtocol.get(directories[i]).has(protocols[j]) == false)) {
                             let path = ABSOLUTE_PATH + '/subgraphs/' + directories[i]
-                            scripts.push('npm --prefix ' + path + ' run -s deploy ' + protocols[j] + ' ' + networks[k] + ' ' + GRAPH_DEPLOYMENT_LOCATION)
+                            scripts.push('npm --prefix ' + path + ' run -s deploy --SUBGRAPH=' + directories[i] + ' --PROTOCOL=' + protocols[j] + ' --NETWORK=' + networks[k] + ' --LOCATION=' + GRAPH_DEPLOYMENT_LOCATION)
                         }
                     }
                 }
