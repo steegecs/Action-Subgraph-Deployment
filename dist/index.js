@@ -8756,6 +8756,7 @@ async function runCommands(array, dependenciesLength, callback) {
             // do the next iteration
             if (index >= dependenciesLength) {
                 deploymentResults += stdout;
+                const path = array[index - 1].split(" ")[2];
                 const data = fs.readFile(path + 'results.txt', { encoding: 'utf8' });
                 allResults += data
             }
