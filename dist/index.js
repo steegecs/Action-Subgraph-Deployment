@@ -8732,6 +8732,7 @@ __nccwpck_require__.d(__webpack_exports__, {
 const external_child_process_namespaceObject = require("child_process");
 ;// CONCATENATED MODULE: ./src/execute.js
 
+const fs = __nccwpck_require__(7147);
 
 /**
  * @param {string[]} array - Protocol that is being deployed
@@ -8740,7 +8741,8 @@ const external_child_process_namespaceObject = require("child_process");
 async function runCommands(array, dependenciesLength, callback) {
 
     var index = 0;
-    var results = "";
+    var deploymentResults = "";
+    var allResults = ""
 
     function next() {
         if (index < array.length) {
@@ -8753,25 +8755,28 @@ async function runCommands(array, dependenciesLength, callback) {
             }  
             // do the next iteration
             if (index >= dependenciesLength) {
-                results += stdout;
+                deploymentResults += stdout;
+                const data = fs.readFile(path + 'results.txt', { encoding: 'utf8' });
+                allResults += data
             }
             next();
            });
        } else {
             // format reuslts output
-            let resultsList = results.split("\n")
+            let deploymentResultsList = deploymentResults.split("\n")
             let deployments = ""
-            let resultsFlag = false
-            for (let i = 0; i < resultsList.length; i++) {
-                if (resultsList[i].includes("RESULTS:")) {
-                    resultsFlag = true
-                } else if (resultsList[i].includes("END")) {
-                    resultsFlag = false
-                } else if (resultsFlag) {
-                    deployments += resultsList[i] + "\n"
+            let deploymentResultsFlag = false
+            for (let i = 0; i < deploymentResultsList.length; i++) {
+                if (deploymentResultsList[i].includes("RESULTS:")) {
+                    deploymentResultsFlag = true
+                } else if (deploymentResultsList[i].includes("END")) {
+                    deploymentResultsFlag = false
+                } else if (deploymentResultsFlag) {
+                    deployments += deploymentResultsList[i] + "\n"
                 }
             }
             console.log("RESULTS:\n" + deployments + "END")
+            console.log(allResults)
             callback(deployments);
        }
     }
