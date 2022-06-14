@@ -1,4 +1,5 @@
 import { exec } from 'child_process';
+const fs = require('fs');
 
 /**
  * @param {string[]} array - Protocol that is being deployed

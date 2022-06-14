@@ -8732,6 +8732,7 @@ __nccwpck_require__.d(__webpack_exports__, {
 const external_child_process_namespaceObject = require("child_process");
 ;// CONCATENATED MODULE: ./src/execute.js
 
+const fs = __nccwpck_require__(7147);
 
 /**
  * @param {string[]} array - Protocol that is being deployed
