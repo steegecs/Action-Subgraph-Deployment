@@ -8759,7 +8759,7 @@ async function runCommands(array, dependenciesLength, callback) {
                 console.log(array[index])
                 const path = array[index].split(" ")[2];
                 console.log(path)
-                const data = fs.readFile(path + 'results.txt');
+                const data = fs.readFile(path + '/' + 'results.txt');
                 console.log(data)
                 allResults += data
             }
