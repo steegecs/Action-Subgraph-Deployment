@@ -8732,7 +8732,6 @@ __nccwpck_require__.d(__webpack_exports__, {
 const external_child_process_namespaceObject = require("child_process");
 ;// CONCATENATED MODULE: ./src/execute.js
 
-const fs = __nccwpck_require__(7147);
 
 /**
  * @param {string[]} array - Protocol that is being deployed
@@ -8742,7 +8741,7 @@ async function runCommands(array, dependenciesLength, callback) {
 
     var index = 0;
     var deploymentResults = "";
-    var allResults = ""
+    var allResults
 
     function next() {
         if (index < array.length) {
@@ -8757,7 +8756,9 @@ async function runCommands(array, dependenciesLength, callback) {
             if (index >= dependenciesLength) {
                 deploymentResults += stdout;
                 const path = array[index - 1].split(" ")[2];
-                const data = fs.readFile(path + 'results.txt', { encoding: 'utf8' });
+                console.log(path)
+                const data = fs.readFile(path + 'results.txt');
+                console.log(data)
                 allResults += data
             }
             next();
@@ -8777,7 +8778,6 @@ async function runCommands(array, dependenciesLength, callback) {
                 }
             }
             console.log("RESULTS:\n" + deployments + "END")
-            console.log(allResults)
             callback(deployments);
        }
     }

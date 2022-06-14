@@ -1,5 +1,4 @@
 import { exec } from 'child_process';
-const fs = require('fs');
 
 /**
  * @param {string[]} array - Protocol that is being deployed
@@ -9,7 +8,7 @@ export async function runCommands(array, dependenciesLength, callback) {
 
     var index = 0;
     var deploymentResults = "";
-    var allResults = ""
+    var allResults
 
     function next() {
         if (index < array.length) {
@@ -24,7 +23,9 @@ export async function runCommands(array, dependenciesLength, callback) {
             if (index >= dependenciesLength) {
                 deploymentResults += stdout;
                 const path = array[index - 1].split(" ")[2];
-                const data = fs.readFile(path + 'results.txt', { encoding: 'utf8' });
+                console.log(path)
+                const data = fs.readFile(path + 'results.txt');
+                console.log(data)
                 allResults += data
             }
             next();
@@ -44,7 +45,6 @@ export async function runCommands(array, dependenciesLength, callback) {
                 }
             }
             console.log("RESULTS:\n" + deployments + "END")
-            console.log(allResults)
             callback(deployments);
        }
     }
