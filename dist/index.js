@@ -8756,13 +8756,6 @@ async function runCommands(array, dependenciesLength, callback) {
             // do the next iteration
             if (index >= dependenciesLength) {
                 deploymentResults += stdout;
-                console.log(array[index])
-                const path = array[index].split(" ")[2];
-                console.log(path + '/' + 'results.txt')
-                const data = fs.readFileSync(path + '/' + 'results.txt');
-
-                console.log(data)
-                allResults += data
             }
             next();
            });
@@ -9062,7 +9055,7 @@ async function deploySubgraphs() {
         directories = Array.from(deployDirectory);
         for (let i = 0; i < directories.length; i++) {
             let path = ABSOLUTE_PATH + '/subgraphs/' + directories[i]
-            scripts.push('npm --prefix ' + path + ' run -s deploy --SUBGRAPH=' + directories[i] + ' --LOCATION=' + GRAPH_DEPLOYMENT_LOCATION)
+            scripts.push('npm --prefix ' + path + ' run -s deploy --SUBGRAPH=' + directories[i] + ' --LOCATION=' + GRAPH_DEPLOYMENT_LOCATION + ' --PRINTLOGS=true')
         }
 
         // Deploy protocols if relevant
@@ -9073,7 +9066,7 @@ async function deploySubgraphs() {
             for (let j = 0; j < protocols.length; j++) {
                 if (deployDirectory.has(directories[i]) == false) {
                     let path = ABSOLUTE_PATH + '/subgraphs/' + directories[i]
-                    scripts.push('npm --prefix ' + path + ' run -s deploy --SUBGRAPH=' + directories[i] + ' --PROTOCOL=' +  protocols[j] + ' --LOCATION=' + GRAPH_DEPLOYMENT_LOCATION)
+                    scripts.push('npm --prefix ' + path + ' run -s deploy --SUBGRAPH=' + directories[i] + ' --PROTOCOL=' +  protocols[j] + ' --LOCATION=' + GRAPH_DEPLOYMENT_LOCATION) + ' --PRINTLOGS=true'
                 }
             }
         }
@@ -9088,7 +9081,7 @@ async function deploySubgraphs() {
                     if (deployDirectory.has(directories[i]) == false) {
                         if (deployProtocol.has(directories[i]) == false | (deployProtocol.has(directories[i]) == true & deployProtocol.get(directories[i]).has(protocols[j]) == false)) {
                             let path = ABSOLUTE_PATH + '/subgraphs/' + directories[i]
-                            scripts.push('npm --prefix ' + path + ' run -s deploy --SUBGRAPH=' + directories[i] + ' --PROTOCOL=' + protocols[j] + ' --NETWORK=' + networks[k] + ' --LOCATION=' + GRAPH_DEPLOYMENT_LOCATION)
+                            scripts.push('npm --prefix ' + path + ' run -s deploy --SUBGRAPH=' + directories[i] + ' --PROTOCOL=' + protocols[j] + ' --NETWORK=' + networks[k] + ' --LOCATION=' + GRAPH_DEPLOYMENT_LOCATION + ' --PRINTLOGS=true')
                         }
                     }
                 }
