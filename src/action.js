@@ -84,7 +84,7 @@ async function deploySubgraphs() {
             for (let j = 0; j < protocols.length; j++) {
                 if (deployDirectory.has(directories[i]) == false) {
                     let path = ABSOLUTE_PATH + '/subgraphs/' + directories[i]
-                    scripts.push('npm --prefix ' + path + ' run -s deploy --SUBGRAPH=' + directories[i] + ' --PROTOCOL=' +  protocols[j] + ' --LOCATION=' + GRAPH_DEPLOYMENT_LOCATION) + ' --PRINTLOGS=true'
+                    scripts.push('npm --prefix ' + path + ' run -s deploy --SUBGRAPH=' + directories[i] + ' --PROTOCOL=' +  protocols[j] + ' --LOCATION=' + GRAPH_DEPLOYMENT_LOCATION + ' --PRINTLOGS=true')
                 }
             }
         }
