@@ -40,7 +40,8 @@ export async function runCommands(array, dependenciesLength, callback) {
                     deployments += deploymentResultsList[i] + "\n"
                 }
             }
-            console.log("RESULTS:\n" + deployments + "END")
+            // console.log("RESULTS:\n" + deployments + "END")
+            console.log(deploymentResults)
             callback(deployments);
        }
     }
