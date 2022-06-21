@@ -41,7 +41,7 @@ export async function runCommands(array, dependenciesLength, callback) {
             //     }
             // }
 
-            callback(deployments);
+            callback(deploymentResults);
        }
     }
     // start the first iteration
