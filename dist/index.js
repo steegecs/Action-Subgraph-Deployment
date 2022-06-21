@@ -8742,7 +8742,6 @@ async function runCommands(array, dependenciesLength, callback) {
 
     var index = 0;
     var deploymentResults = "";
-    var allResults
 
     function next() {
         if (index < array.length) {
@@ -8756,25 +8755,25 @@ async function runCommands(array, dependenciesLength, callback) {
             // do the next iteration
             if (index >= dependenciesLength) {
                 deploymentResults += stdout;
+                console.log(stdout)
             }
             next();
            });
        } else {
-            // format reuslts output
-            let deploymentResultsList = deploymentResults.split("\n")
-            let deployments = ""
-            let deploymentResultsFlag = false
-            for (let i = 0; i < deploymentResultsList.length; i++) {
-                if (deploymentResultsList[i].includes("RESULTS:")) {
-                    deploymentResultsFlag = true
-                } else if (deploymentResultsList[i].includes("END")) {
-                    deploymentResultsFlag = false
-                } else if (deploymentResultsFlag) {
-                    deployments += deploymentResultsList[i] + "\n"
-                }
-            }
-            // console.log("RESULTS:\n" + deployments + "END")
-            console.log(deploymentResults)
+            // format results output
+            // let deploymentResultsList = deploymentResults.split("\n")
+            // let deployments = ""
+            // let deploymentResultsFlag = false
+            // for (let i = 0; i < deploymentResultsList.length; i++) {
+            //     if (deploymentResultsList[i].includes("RESULTS:")) {
+            //         deploymentResultsFlag = true
+            //     } else if (deploymentResultsList[i].includes("END")) {
+            //         deploymentResultsFlag = false
+            //     } else if (deploymentResultsFlag) {
+            //         deployments += deploymentResultsList[i] + "\n"
+            //     }
+            // }
+
             callback(deployments);
        }
     }
