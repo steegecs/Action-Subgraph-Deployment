@@ -23,6 +23,7 @@ export async function runCommands(array, dependenciesLength, callback) {
             // do the next iteration
             if (index >= dependenciesLength) {
                 deploymentResults += stdout;
+                console.log(stdout)
             }
             next();
            });
@@ -41,7 +42,7 @@ export async function runCommands(array, dependenciesLength, callback) {
                 }
             }
             // console.log("RESULTS:\n" + deployments + "END")
-            console.log(deploymentResults)
+            // console.log(deploymentResults)
             callback(deployments);
        }
     }
