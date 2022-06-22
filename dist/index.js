@@ -8755,11 +8755,25 @@ async function runCommands(array, dependenciesLength, callback) {
             // do the next iteration
             if (index >= dependenciesLength) {
                 deploymentResults += stdout;
-                console.log(stdout)
+                // console.log(stdout)
             }
             next();
            });
        } else {
+            let deploymentResultsList = deploymentResults.split("\n")
+            let deployments = ""
+            let deploymentResultsFlag = false
+            for (let i = 0; i < deploymentResultsList.length; i++) {
+                if (deploymentResultsList[i].includes("RESULTS:")) {
+                    deploymentResultsFlag = true
+                } else if (deploymentResultsList[i].includes("END")) {
+                    deploymentResultsFlag = false
+                } else if (deploymentResultsFlag) {
+                    deployments += deploymentResultsList[i] + "\n"
+                }
+            }
+            console.log(deployments)
+            console.log(deploymentResults)
             callback();
        }
     }
