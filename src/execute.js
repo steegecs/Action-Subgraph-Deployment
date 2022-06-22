@@ -27,7 +27,7 @@ export async function runCommands(array, dependenciesLength, callback) {
             next();
            });
        } else {
-            callback(deploymentResults);
+            callback();
        }
     }
     // start the first iteration

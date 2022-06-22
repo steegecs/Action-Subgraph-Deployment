@@ -108,7 +108,7 @@ async function deploySubgraphs() {
 
     console.log("Running scripts: ")
     console.log(scripts)
-    runCommands(scripts, dependenciesLength, function(deployments) {})
+    runCommands(scripts, dependenciesLength, function() {})
     }
 }
 

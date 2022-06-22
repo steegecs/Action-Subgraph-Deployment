@@ -8760,7 +8760,7 @@ async function runCommands(array, dependenciesLength, callback) {
             next();
            });
        } else {
-            callback(deploymentResults);
+            callback();
        }
     }
     // start the first iteration
@@ -9076,7 +9076,7 @@ async function deploySubgraphs() {
 
     console.log("Running scripts: ")
     console.log(scripts)
-    runCommands(scripts, dependenciesLength, function(deployments) {})
+    runCommands(scripts, dependenciesLength, function() {})
     }
 }
 
