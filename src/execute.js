@@ -27,20 +27,6 @@ export async function runCommands(array, dependenciesLength, callback) {
             next();
            });
        } else {
-            // format results output
-            // let deploymentResultsList = deploymentResults.split("\n")
-            // let deployments = ""
-            // let deploymentResultsFlag = false
-            // for (let i = 0; i < deploymentResultsList.length; i++) {
-            //     if (deploymentResultsList[i].includes("RESULTS:")) {
-            //         deploymentResultsFlag = true
-            //     } else if (deploymentResultsList[i].includes("END")) {
-            //         deploymentResultsFlag = false
-            //     } else if (deploymentResultsFlag) {
-            //         deployments += deploymentResultsList[i] + "\n"
-            //     }
-            // }
-
             callback(deploymentResults);
        }
     }
