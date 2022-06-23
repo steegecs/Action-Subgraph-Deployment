@@ -8777,7 +8777,7 @@ async function runCommands(array, dependenciesLength, callback) {
             if (deployments.includes("Deployment Failed:")) {
                 core.setFailed(error.message);
             }
-            console.log(deployments)
+            console.log("\nRESULTS:\n" + deployments + "\nEND")
             console.log(deploymentResults)
             callback();
        }
