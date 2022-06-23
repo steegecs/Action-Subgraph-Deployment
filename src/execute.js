@@ -42,7 +42,7 @@ export async function runCommands(array, dependenciesLength, callback) {
             }
 
             if (deployments.includes("Deployment Failed:")) {
-                core.setFailed(error.message);
+                core.setFailed("One or more deployments failed");
             }
             console.log("\nRESULTS:\n" + deployments + "\nEND")
             console.log(deploymentResults)
