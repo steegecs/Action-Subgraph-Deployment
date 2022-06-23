@@ -8732,6 +8732,7 @@ __nccwpck_require__.d(__webpack_exports__, {
 const external_child_process_namespaceObject = require("child_process");
 ;// CONCATENATED MODULE: ./src/execute.js
 
+const core = __nccwpck_require__(2186)
 const fs = __nccwpck_require__(7147);
 
 /**
@@ -8771,6 +8772,10 @@ async function runCommands(array, dependenciesLength, callback) {
                 } else if (deploymentResultsFlag) {
                     deployments += deploymentResultsList[i] + "\n"
                 }
+            }
+
+            if (deployments.includes("Deployment Failed:")) {
+                core.setFailed(error.message);
             }
             console.log(deployments)
             console.log(deploymentResults)

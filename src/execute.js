@@ -1,4 +1,5 @@
 import { exec } from 'child_process';
+const core = require('@actions/core')
 const fs = require('fs');
 
 /**
@@ -38,6 +39,10 @@ export async function runCommands(array, dependenciesLength, callback) {
                 } else if (deploymentResultsFlag) {
                     deployments += deploymentResultsList[i] + "\n"
                 }
+            }
+
+            if (deployments.includes("Deployment Failed:")) {
+                core.setFailed(error.message);
             }
             console.log(deployments)
             console.log(deploymentResults)
