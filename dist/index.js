@@ -9084,7 +9084,7 @@ async function deploySubgraphs(HOSTED_SERVICE_ACCESS_TOKEN, CHANGED_FILES, ABSOL
 
         directoriesNotSpecified = Array.from(deployDirectoryNotSpecified)
         for (let i = 0; i < directoriesNotSpecified.length; i++) {
-            console.log("Warning: " + directoriesNotSpecified[i] + " directory is not specified in the deployment configurations")
+            console.log("Warning: " + directoriesNotSpecified[i] + " directory is not specified in the deployment configurations\n")
         }
 
         // Deploy directories if relevant
