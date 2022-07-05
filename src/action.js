@@ -3,16 +3,24 @@ const github = require('@actions/github')
 const DefaultMap = require('./DefaultMap');
 const { runCommands } = require('./execute');
 
-async function deploySubgraphs() {
-    HOSTED_SERVICE_ACCESS_TOKEN = core.getInput('HOSTED_SERVICE_ACCESS_TOKEN')
-    CHANGED_FILES = core.getInput('CHANGED_FILES').split(" ")
-    ABSOLUTE_PATH = core.getInput('ABSOLUTE_PATH')
-    GRAPH_DEPLOYMENT_LOCATION = core.getInput('GRAPH_DEPLOYMENT_LOCATION')
+const HOSTED_SERVICE_ACCESS_TOKEN = core.getInput('HOSTED_SERVICE_ACCESS_TOKEN')
+const CHANGED_FILES = core.getInput('CHANGED_FILES').split(" ")
+const ABSOLUTE_PATH = core.getInput('ABSOLUTE_PATH')
+const GRAPH_DEPLOYMENT_LOCATION = core.getInput('GRAPH_DEPLOYMENT_LOCATION')
 
+const DEPLOYMENT_CONFIGURATIONS_JSON = require(ABSOLUTE_PATH + "/deployment/deploymentConfigurations.json");
+const DEPLOYMENT_CONFIGURATIONS = JSON.parse(JSON.stringify(DEPLOYMENT_CONFIGURATIONS_JSON))[
+    "subgraphs"
+  ];
+
+async function deploySubgraphs(HOSTED_SERVICE_ACCESS_TOKEN, CHANGED_FILES, ABSOLUTE_PATH, GRAPH_DEPLOYMENT_LOCATION, DEPLOYMENT_CONFIGURATIONS) {
     let deployAny = 0
+
     let deployDirectory = new Set()
     let deployProtocol = new DefaultMap(() => new Set());
     let deployNetwork = new DefaultMap(() => new DefaultMap(() => new Set()));
+
+    let deployDirectoryNotSpecified = new Set()
 
     // Iterate through all changed files
     for (let i = 0; i < CHANGED_FILES.length; i++) {
@@ -26,13 +34,20 @@ async function deploySubgraphs() {
                 let refFolder = CHANGED_FILES[i].split('/src/')[0].split('/').reverse()[1]
                 // If src code is in common code folder for the directory
                 if (refFolder.includes('subgraphs')) {
-                    deployDirectory.add(subgraphDir)
-                    deployAny=1
+                    if (subgraphDir in DEPLOYMENT_CONFIGURATIONS == false){
+                        deployDirectoryNotSpecified.add(subgraphDir)
+                    } else {
+                        deployDirectory.add(subgraphDir)
+                        deployAny=1
+                    }
                 } else if (refFolder.includes('protocols')) {
-
-                    protocol = CHANGED_FILES[i].split('/src/')[0].split('/').reverse()[0]
-                    deployProtocol.get(subgraphDir).add(protocol)
-                    deployAny=1
+                    if (subgraphDir in DEPLOYMENT_CONFIGURATIONS == false){
+                        deployDirectoryNotSpecified.add(subgraphDir)
+                    } else {
+                        protocol = CHANGED_FILES[i].split('/src/')[0].split('/').reverse()[0]
+                        deployProtocol.get(subgraphDir).add(protocol)
+                        deployAny=1
+                    }
                 }
             } else if (CHANGED_FILES[i].includes("/config/")) {
 
@@ -42,11 +57,15 @@ async function deploySubgraphs() {
                     let refFolder2 = CHANGED_FILES[i].split('/config/')[1].split('/')[0]
 
                     if (refFolder2.includes('networks')) {
-                        let protocol = CHANGED_FILES[i].split('/config/')[0].split('/').reverse()[0]
-                        let network = CHANGED_FILES[i].split('/config/')[1].split('/')[1]
+                        if (subgraphDir in DEPLOYMENT_CONFIGURATIONS == false){
+                            deployDirectoryNotSpecified.add(subgraphDir)
+                        } else {
+                            let protocol = CHANGED_FILES[i].split('/config/')[0].split('/').reverse()[0]
+                            let network = CHANGED_FILES[i].split('/config/')[1].split('/')[1]
 
-                        deployNetwork.get(subgraphDir).get(protocol).add(network)
-                        deployAny=1
+                            deployNetwork.get(subgraphDir).get(protocol).add(network)
+                            deployAny=1
+                        }
                     }
                 } else {
                     console.log("Warning: config/ folder should be located at subgraphs/**subgraph**/protocols/config/")
@@ -54,6 +73,8 @@ async function deploySubgraphs() {
             }
         }
     }
+
+    
 
     // If a relevant file was changed, install dependencies and deploy subgraphs
     let scripts = []
@@ -65,9 +86,16 @@ async function deploySubgraphs() {
         scripts.push('graph auth --product hosted-service ' + HOSTED_SERVICE_ACCESS_TOKEN)
         let dependenciesLength = scripts.length
 
-        let directories =[]
+        let directories = []
         let protocols = []
         let networks = []
+
+        let directoriesNotSpecified = []
+
+        directoriesNotSpecified = Array.from(deployDirectoryNotSpecified)
+        for (let i = 0; i < directoriesNotSpecified.length; i++) {
+            console.log("Warning: " + directoriesNotSpecified[i] + " directory is not specified in the deployment configurations\n")
+        }
 
         // Deploy directories if relevant
         directories = Array.from(deployDirectory);
@@ -112,4 +140,4 @@ async function deploySubgraphs() {
     }
 }
 
-deploySubgraphs();
+deploySubgraphs(HOSTED_SERVICE_ACCESS_TOKEN, CHANGED_FILES, ABSOLUTE_PATH, GRAPH_DEPLOYMENT_LOCATION, DEPLOYMENT_CONFIGURATIONS);
