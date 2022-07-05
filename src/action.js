@@ -86,13 +86,15 @@ async function deploySubgraphs(HOSTED_SERVICE_ACCESS_TOKEN, CHANGED_FILES, ABSOL
         scripts.push('graph auth --product hosted-service ' + HOSTED_SERVICE_ACCESS_TOKEN)
         let dependenciesLength = scripts.length
 
-        let directories =[]
+        let directories = []
         let protocols = []
         let networks = []
 
+        let directoriesNotSpecified = []
+
         directoriesNotSpecified = Array.from(deployDirectoryNotSpecified)
         for (let i = 0; i < directoriesNotSpecified.length; i++) {
-            console.log("Warning: " + directoriesNotSpecified[i] + " directory is not specified in the deployment configurations")
+            console.log("Warning: " + directories[i] + " directory is not specified in the deployment configurations")
         }
 
         // Deploy directories if relevant
