@@ -8998,7 +8998,7 @@ const CHANGED_FILES = core.getInput('CHANGED_FILES').split(" ")
 const ABSOLUTE_PATH = core.getInput('ABSOLUTE_PATH')
 const GRAPH_DEPLOYMENT_LOCATION = core.getInput('GRAPH_DEPLOYMENT_LOCATION')
 
-const DEPLOYMENT_CONFIGURATIONS_JSON = require(ABSOLUTE_PATH + "/deployment/deploymentConfigurations.json");
+const DEPLOYMENT_CONFIGURATIONS_JSON = require(ABSOLUTE_PATH + "/deployment/deployment.json");
 const DEPLOYMENT_CONFIGURATIONS = JSON.parse(JSON.stringify(DEPLOYMENT_CONFIGURATIONS_JSON))[
     "subgraphs"
   ];
