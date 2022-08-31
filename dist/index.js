@@ -9000,16 +9000,16 @@ const GRAPH_DEPLOYMENT_LOCATION = core.getInput('GRAPH_DEPLOYMENT_LOCATION')
 const COMMIT_BEFORE_PUSH = core.getInput('COMMIT_BEFORE_PUSH')
 const COMMIT_AFTER_PUSH = core.getInput('COMMIT_AFTER_PUSH')
 
-console.log("git show " + COMMIT_BEFORE_PUSH + ":." + ABSOLUTE_PATH + "/deployment/deployment.json")
-console.log("git show " + COMMIT_AFTER_PUSH + ":." + ABSOLUTE_PATH + "/deployment/deployment.json")
+console.log(COMMIT_BEFORE_PUSH)
+console.log(COMMIT_AFTER_PUSH)
 
-let scripts = []
+let scripts = (/* unused pure expression or super */ null && ([]))
 // scripts.push("git show " + COMMIT_BEFORE_PUSH + ":." + ABSOLUTE_PATH + "/deployment/deployment.json")
 // scripts.push("git show " + COMMIT_AFTER_PUSH + ":." + ABSOLUTE_PATH + "/deployment/deployment.json")
-scripts.push("git fetch")
-scripts.push("git show " + COMMIT_BEFORE_PUSH + ":." + ABSOLUTE_PATH + "/deployment/deployment.json")
-scripts.push("git show " + COMMIT_AFTER_PUSH + ":." + ABSOLUTE_PATH + "/deployment/deployment.json")
-runCommands(scripts, 3, function() {})
+// scripts.push("git fetch")
+// scripts.push("git show " + COMMIT_BEFORE_PUSH + ":." + ABSOLUTE_PATH + "/deployment/deployment.json")
+// scripts.push("git show " + COMMIT_AFTER_PUSH + ":." + ABSOLUTE_PATH + "/deployment/deployment.json")
+// runCommands(scripts, 3, function() {})
 
 // const DEPLOYMENT_CONFIGURATIONS_JSON = require(ABSOLUTE_PATH + "/deployment/deployment.json");
 // const DEPLOYMENT_CONFIGURATIONS = JSON.parse(JSON.stringify(DEPLOYMENT_CONFIGURATIONS_JSON))[
