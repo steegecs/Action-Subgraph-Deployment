@@ -9002,6 +9002,7 @@ const COMMIT_AFTER_PUSH = core.getInput('COMMIT_AFTER_PUSH')
 
 console.log(COMMIT_BEFORE_PUSH)
 console.log(COMMIT_AFTER_PUSH)
+console.log(ABSOLUTE_PATH + "/deployment/deployment.json")
 
 let scripts = []
 scripts.push("git show " + COMMIT_BEFORE_PUSH + ":" + ABSOLUTE_PATH + "/deployment/deployment.json")
