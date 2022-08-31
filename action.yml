@@ -15,6 +15,12 @@ inputs:
   GRAPH_DEPLOYMENT_LOCATION:
     description: "Deployment location on TheGraph Hosted Service"
     required: true
+  COMMIT_BEFORE_PUSH:
+    description: "Commit hash before push to the repository"
+    required: true
+  COMMIT_AFTER_PUSH:
+    description: "Commit hash after push to the repository"
+    required: true
   
 runs:
   using: 'node16'
