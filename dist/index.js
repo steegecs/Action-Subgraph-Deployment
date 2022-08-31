@@ -9007,8 +9007,8 @@ let scripts = []
 // scripts.push("git show " + COMMIT_BEFORE_PUSH + ":." + ABSOLUTE_PATH + "/deployment/deployment.json")
 // scripts.push("git show " + COMMIT_AFTER_PUSH + ":." + ABSOLUTE_PATH + "/deployment/deployment.json")
 scripts.push("git fetch")
-scripts.push("git checkout " + COMMIT_BEFORE_PUSH)
-scripts.push("git checkout " + COMMIT_AFTER_PUSH)
+scripts.push("git show " + COMMIT_BEFORE_PUSH + ":." + ABSOLUTE_PATH + "/deployment/deployment.json")
+scripts.push("git show " + COMMIT_AFTER_PUSH + ":." + ABSOLUTE_PATH + "/deployment/deployment.json")
 runCommands(scripts, 2, function() {})
 
 // const DEPLOYMENT_CONFIGURATIONS_JSON = require(ABSOLUTE_PATH + "/deployment/deployment.json");
