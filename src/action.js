@@ -16,6 +16,7 @@ console.log("git show " + COMMIT_AFTER_PUSH + ":." + ABSOLUTE_PATH + "/deploymen
 let scripts = []
 // scripts.push("git show " + COMMIT_BEFORE_PUSH + ":." + ABSOLUTE_PATH + "/deployment/deployment.json")
 // scripts.push("git show " + COMMIT_AFTER_PUSH + ":." + ABSOLUTE_PATH + "/deployment/deployment.json")
+scripts.push("git fetch -t")
 scripts.push("git checkout " + COMMIT_BEFORE_PUSH)
 scripts.push("git checkout " + COMMIT_AFTER_PUSH)
 runCommands(scripts, 2, function() {})
