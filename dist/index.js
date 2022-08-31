@@ -9004,7 +9004,7 @@ console.log("git show " + COMMIT_BEFORE_PUSH + ":." + ABSOLUTE_PATH + "/deployme
 console.log("git show " + COMMIT_AFTER_PUSH + ":." + ABSOLUTE_PATH + "/deployment/deployment.json")
 
 let scripts = []
-scripts.push("git show HEAD^^:." + ABSOLUTE_PATH + "/deployment/deployment.json")
+scripts.push("git show " + COMMIT_BEFORE_PUSH + ":." + ABSOLUTE_PATH + "/deployment/deployment.json")
 scripts.push("git show " + COMMIT_AFTER_PUSH + ":." + ABSOLUTE_PATH + "/deployment/deployment.json")
 // scripts.push("git checkout " + COMMIT_BEFORE_PUSH)
 // scripts.push("git checkout " + COMMIT_AFTER_PUSH)
