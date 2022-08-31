@@ -9005,8 +9005,8 @@ console.log(COMMIT_AFTER_PUSH)
 console.log(ABSOLUTE_PATH + "/deployment/deployment.json")
 
 let scripts = []
-scripts.push("git show " + COMMIT_BEFORE_PUSH + ":" + ABSOLUTE_PATH + "/deployment/deployment.json")
-scripts.push("git show " + COMMIT_AFTER_PUSH + ":" + ABSOLUTE_PATH + "/deployment/deployment.json")
+scripts.push("git show " + COMMIT_BEFORE_PUSH + ":." + ABSOLUTE_PATH + "/deployment/deployment.json")
+scripts.push("git show " + COMMIT_AFTER_PUSH + ":." + ABSOLUTE_PATH + "/deployment/deployment.json")
 
 runCommands(scripts, 2, function() {})
 
