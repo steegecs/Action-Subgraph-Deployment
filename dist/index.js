@@ -8747,8 +8747,8 @@ async function runCommands(array, dependenciesLength, callback) {
     function next() {
         if (index < array.length) {
             (0,external_child_process_namespaceObject.exec)(array[index++], function(error, stdout, stderr) {
-            // console.log('stdout: ' + stdout);
-            // console.log('stderr: ' + stderr);
+            console.log('stdout: ' + stdout);
+            console.log('stderr: ' + stderr);
             if (error !== null) {
                 // console.log('exec error: ' + error);
                 index = array.length
