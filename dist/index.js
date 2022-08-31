@@ -9002,13 +9002,12 @@ const COMMIT_AFTER_PUSH = core.getInput('COMMIT_AFTER_PUSH')
 
 console.log("git show " + COMMIT_BEFORE_PUSH + ":." + ABSOLUTE_PATH + "/deployment/deployment.json")
 console.log("git show " + COMMIT_AFTER_PUSH + ":." + ABSOLUTE_PATH + "/deployment/deployment.json")
-console.log(ABSOLUTE_PATH + "/deployment/deployment.json")
 
 let scripts = []
 // scripts.push("git show " + COMMIT_BEFORE_PUSH + ":." + ABSOLUTE_PATH + "/deployment/deployment.json")
 scripts.push("git show " + COMMIT_AFTER_PUSH + ":." + ABSOLUTE_PATH + "/deployment/deployment.json")
 
-runCommands(scripts, 2, function() {})
+runCommands(scripts, 1, function() {})
 
 // const DEPLOYMENT_CONFIGURATIONS_JSON = require(ABSOLUTE_PATH + "/deployment/deployment.json");
 // const DEPLOYMENT_CONFIGURATIONS = JSON.parse(JSON.stringify(DEPLOYMENT_CONFIGURATIONS_JSON))[
