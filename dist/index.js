@@ -8778,7 +8778,7 @@ async function runCommands(array, dependenciesLength, callback) {
                 core.setFailed("One or more deployments failed");
             }
             if (deployments == "") {
-                core.setFailed("Error in execution of deployments. See logs below. If empty post an issue in the Messari repo.");
+                // core.setFailed("Error in execution of deployments. See logs below. If empty post an issue in the Messari repo.");
             }
             console.log("\nRESULTS:\n" + deployments + "END\n")
             console.log(deploymentResults)
